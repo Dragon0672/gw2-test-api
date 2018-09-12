@@ -3,9 +3,149 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-            <div class="list-group">
+            <div class="list-group text-center">
 
             </div>
         </div>
     </div>
+    <hr>
+{#  <h2 class="display-4">QUOTI <small class="text-muted">(getCurl1)</small></h2>
+    <ul>
+        <h3>PVE</h3>
+        {% for pveDaily in gw2Responses.pve %}
+            #}{#{% dump gw2Responses %}#}{#
+            <li class="list-group-item">{{ pveDaily.id }}</li>
+        {% endfor %}
+        <br>
+        <h3>PVP</h3>
+        {% for pvpDaily in gw2Responses.pvp %}
+            {% dump gw2Responses %}
+            <li class="list-group-item">{{ pvpDaily.id }}</li>
+        {% endfor %}
+        <br>
+        <h3>WVW</h3>
+        {% for wvwDaily in gw2Responses.wvw %}
+            #}{#{% dump gw2Responses %}#}{#
+            <li class="list-group-item">{{ wvwDaily.id }}</li>
+        {% endfor %}
+        <br>
+    </ul>#}
+
+    {#<pre>{{ gw2Responses.pve[0].id }}</pre>#}
+
+    {#<h2 class="display-4">POST Account Characters <small class="text-muted">(getCurl2 - $urlCharacters)</small></h2>
+    <p>Liste avec account apiKey</p>
+    <ul class="list-group list-group-flush">
+        {% for chars in gw2Responses %}
+            <li class="list-group-item">{{ chars }}</li>
+        {% endfor %}
+    </ul>#}
+
+    <div class="container">
+        {#getCurl3 - Journal de la guilde#}
+        <div class="list-group">
+            {% for key, item in gw2Responses %}
+                <a class="list-group-item list-group-item-action flex-column align-items-start col-5">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">
+
+                        {% if item.type is defined %}
+                            <span class="badge badge-pill
+                                {% if item.type == "stash" %} badge-primary
+                                {% elseif item.type == "upgrade" %} badge-light
+                                {% elseif item.type == "invited" %} badge-warning
+                                {% elseif item.type == "joined" %} badge-success
+                                {% elseif item.type == "invite_declined" %}badge-dark
+                                {% elseif item.type == "kick" %}badge-danger
+                                {% endif %}">{{ key + 1 }}</span>
+                                {{ item.type }}
+                        {% endif %}
+                        </h5>
+
+                        {% if item.time is defined %}
+                            <small>
+                                {{ item.time|date("d/m/Y H:i:s") }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    {% if item.id is defined %}
+                        <p class="mb-1 badge badge-info">
+                                {{ item.id }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.user is defined %}
+                        <p class="mb-1 badge badge-primary">
+                            {{ item.user }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.motd is defined %}
+                        <p>
+                            {{ item.motd }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.invited_by is defined %}
+                        <p class="mb-1">
+                            Invited by : {{ item.invited_by }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.kicked_by is defined %}
+                        <p class="mb-1">
+                            Kicked by : {{ item.kicked_by }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.declined_by is defined %}
+                        <p class="mb-1">
+                            Declined by : {{ item.declined_by }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.operation is defined %}
+                        <p class="mb-1">
+                            Operation : {{ item.operation }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.item_id is defined %}
+                        <p class="mb-1">
+                            Item id : {{ item.item_id }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.action is defined %}
+                        <p class="mb-1">
+                            Action : {{ item.action }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.upgrade_id is defined %}
+                        <p class="mb-1">
+                            Upgrade id : {{ item.upgrade_id }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.count is defined %}
+                        <p class="mb-1">
+                            Qty : {{ item.count }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.coins is defined %}
+                        <p class="mb-1">
+                            Coins : {{ item.coins }}
+                        </p>
+                    {% endif %}
+
+
+                    </a>
+            {% endfor %}
+        </div>
+    </div>
+
+
 {% endblock %}
